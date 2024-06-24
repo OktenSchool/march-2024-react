@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {FC} from 'react';
 import './App.css';
+import MyCustomButtonComponent from "./components/my-custom-button-component/MyCustomButtonComponent";
 
-const App = () => {
 
-
+const App: FC = () => {
     return (
-        <div></div>
+        <>
+            <MyCustomButtonComponent label={'first btn'} nameOfClass={'btn'}>asdadsad</MyCustomButtonComponent>
+            <MyCustomButtonComponent label={'second btn'} nameOfClass={'btn'}>qewqewqwe</MyCustomButtonComponent>
+
+        </>
     );
 }
 
