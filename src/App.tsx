@@ -1,11 +1,14 @@
 import React from 'react';
 import './App.css';
+import UsersComponent from "./components/users-component/UsersComponent";
 
 const App = () => {
 
 
     return (
-        <div></div>
+        <div>
+            <UsersComponent/>
+        </div>
     );
 }
 
