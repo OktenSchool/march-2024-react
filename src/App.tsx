@@ -1,41 +1,26 @@
-import React, {ReactNode, useEffect, useReducer, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
-
-const reducer = (
-    state: number,
-    action: { type: string, payload: number }
-) => {
-    switch (action.type) {
-        case 'add':
-            return state + action.payload;
-        case 'remove':
-            return state + action.payload;
-    }
-    return state;
-}
 
 const App = () => {
 
+    const [counter, setCounter] = useState(0);
+    useEffect(() => {
+        let id = setInterval(() => {
+            console.log('interval')
+        }, 1000);
 
-    const [counter, disptach] = useReducer(reducer, 0);
+        return () => {
+            clearInterval(id);
+        }
+    }, [counter]);
+
 
     return (
         <div>
 
-            <h2>{counter}</h2>
-            <button
-                onClick={() => {
-                    disptach({type: 'add', payload: 10});
-                }}
-            >inc
-            </button>
-            <hr/>
-            <button
-                onClick={() => {
-                    disptach({type: 'remove', payload: -20});
-
-                }}
-            >dec
+            <button onClick={() => {
+                setCounter(counter + 1);
+            }}> push me {counter}
             </button>
 
         </div>
