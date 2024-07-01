@@ -1,38 +1,43 @@
-import React, {ReactNode, useEffect, useRef, useState} from 'react';
+import React, {ReactNode, useEffect, useReducer, useRef, useState} from 'react';
 import './App.css';
+
+const reducer = (
+    state: number,
+    action: { type: string, payload: number }
+) => {
+    switch (action.type) {
+        case 'add':
+            return state + action.payload;
+        case 'remove':
+            return state + action.payload;
+    }
+    return state;
+}
 
 const App = () => {
 
-    // variable - reinit after each rerender
-    // useRef - store tate between rerender, but cannot render themself
-    // useState - useRef + rerender
 
-    const [counter, setCounter] = useState<number>(0);
-
-    const ref = useRef<any>();
-    useEffect(() => {
-        console.log(ref);
-    }, []);
-
+    const [counter, disptach] = useReducer(reducer, 0);
 
     return (
         <div>
+
+            <h2>{counter}</h2>
             <button
                 onClick={() => {
-                    setCounter(prevState => prevState + 1);
+                    disptach({type: 'add', payload: 10});
+                }}
+            >inc
+            </button>
+            <hr/>
+            <button
+                onClick={() => {
+                    disptach({type: 'remove', payload: -20});
 
                 }}
-            >click me {counter}
+            >dec
             </button>
-            <button ref={ref}
-                    onClick={() => {
 
-                        console.log(ref.current);
-
-                    }}
-            >ref {ref.current}
-            </button>
-            <h2>ref : {ref.current}</h2>
         </div>
     );
 }
