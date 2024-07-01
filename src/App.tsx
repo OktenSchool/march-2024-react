@@ -1,27 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './App.css';
+import {useFetch} from "./hooks/useFetch";
+
 
 const App = () => {
 
-    const [counter, setCounter] = useState(0);
-    useEffect(() => {
-        let id = setInterval(() => {
-            console.log('interval')
-        }, 1000);
-
-        return () => {
-            clearInterval(id);
-        }
-    }, [counter]);
-
+    let data = useFetch<{ id: number, title: string }>('/posts');
 
     return (
         <div>
+            {
+                data.map(value => <div>{value.title}</div>)
+            }
 
-            <button onClick={() => {
-                setCounter(counter + 1);
-            }}> push me {counter}
-            </button>
 
         </div>
     );
